@@ -29,11 +29,9 @@ const ProductDetail = (props) => {
         //Set state cho image khi ảnh chi tiết được chọn
         setSelectedImage(data.content.image);
     }
-
     useEffect(() => {
         getProductDetailApi()
     }, [id]) //Thêm dependency id để khi id(param url) thay đổi thì hàm getProductDetail sẽ tự chạy lại với id param mới
-
     return (
         <div className=" mx-auto items-start min-h-screen ">
             <div className="flex flex-col md:flex-row bg-white p-4 rounded-lg mx-auto w-2/3">
@@ -60,8 +58,6 @@ const ProductDetail = (props) => {
                     {/* <h1 className="mt-2">{productDetail.shortDescription}</h1> */}
                     <p className="text-gray-600 mt-2">{productDetail.description}</p>
                     <p className="text-2xl text-red-500 mt-2 font-bold">{productDetail.price} $</p>
-
-
                     {/* Size Options */}
                     <div className="mt-4">
                         <h3 className="text-lg font-semibold">Select Size</h3>
