@@ -1,12 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-const products = [
-  { name: 'Product 3', price: 4999,img:'http://picsum.photos/id/50/100/100',type:'A'},
-  { name: 'Product 2', price: 3999 ,img:'http://picsum.photos/id/51/100/100',type:'B'},
-  { name: 'Product 1', price: 2999,img:'http://picsum.photos/id/52/100/100' ,type:'A'},
-];
+// const products = [
+//   { name: 'Product 3', price: 4999,img:'http://picsum.photos/id/50/100/100',type:'A'},
+//   { name: 'Product 2', price: 3999 ,img:'http://picsum.photos/id/51/100/100',type:'B'},
+//   { name: 'Product 1', price: 2999,img:'http://picsum.photos/id/52/100/100' ,type:'A'},
+// ];
 
 const ProductList = () => {
+
+  const [arrProduct,setArrProduct] = useState([]);
+  const getAllProduct = async () => {
+    const res =  await fetch('https://apistore.cybersoft.edu.vn/api/Product');
+    const data = await res.json();
+
+    setArrProduct(data.content);
+  }
+  useEffect(()=>{
+    getAllProduct();
+  },[]);
+
+  
   return (
     <div>
       <nav className="text-sm text-gray-500 mb-1">
@@ -41,7 +54,7 @@ const ProductList = () => {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {products.map((product, index) => (
+            {arrProduct.map((product, index) => (
               <tr key={index}>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <input type="checkbox" className="form-checkbox" />
@@ -50,7 +63,7 @@ const ProductList = () => {
                   <div className="text-sm font-medium text-gray-900">{product.name}</div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <img src={product.img} width={50} height={50} alt='...' />
+                  <img src={product.image} width={50} height={50} alt='...' />
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="text-sm text-gray-900">{product.price}</div>
@@ -62,9 +75,7 @@ const ProductList = () => {
                   <a href="#" className="text-orange-600 hover:text-orange-900">Edit</a>
                   <a href="#" className="text-orange-600 hover:text-orange-900 mx-2">| Delete</a>
                   <a href="#" className="text-orange-600 hover:text-orange-900 mx-2">| View detail</a>
-
                 </td>
-            
               </tr>
             ))}
           </tbody>
