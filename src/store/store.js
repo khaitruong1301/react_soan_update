@@ -1,6 +1,12 @@
-import {configureStores} from '@reduxjs/toolkit' ;
+
+import { configureStore } from '@reduxjs/toolkit';
+import countReducer from './reducers/countReducer'
+export const store = configureStore({
+    reducer: {
+        //Nơi liệt kê các state của ứng dụng
+        countReducer: countReducer
+    }
+
+})
 
 
-export const store = configureStores({
-    numberState: (state = 1) => state
-})      
